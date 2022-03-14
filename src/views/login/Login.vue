@@ -11,7 +11,7 @@
         </el-form-item>
         <el-form-item>
           <el-button>注册</el-button>
-          <el-button>登录</el-button>
+          <el-button @click="login">登录</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -32,7 +32,11 @@
       Background
     },
     methods: {
-
+      login(){
+        this.$router.push({
+          name:'Layout'
+        })
+      }
     },
     mounted() {
 
@@ -49,7 +53,6 @@
     background: url(~@/assets/imgs/login_background.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
-
     .login_form {
       width: 420px;
       height: 250px;
