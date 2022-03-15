@@ -11,6 +11,9 @@ import { getRequest, postRequest, deleteRequest, putRequest } from './utils/requ
 //按需引入elementui
 import elementui from  '@/utils/elementui'
 
+//导入时间格式化文件
+import moment from 'moment' // 导入时间格式化文件
+
 //引入svg
 import '@/assets/icons'
 
@@ -21,6 +24,7 @@ Vue.prototype.getRequest = getRequest
 Vue.prototype.postRequest = postRequest
 Vue.prototype.deleteRequest = deleteRequest
 Vue.prototype.putRequest = putRequest
+Vue.prototype.$moment = moment
 
 new Vue({
   router,

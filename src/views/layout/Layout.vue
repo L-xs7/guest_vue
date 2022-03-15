@@ -1,8 +1,12 @@
 <template>
     <el-container>
-        <el-header></el-header>
+        <!-- <el-header></el-header> -->
         <el-container>
             <el-aside width="200px">
+                <div class="logo">
+                    <svg-icon icon-class="logo" class-name="logoSvg"></svg-icon>
+                    <span>Ding</span>
+                </div>
                 <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
                     active-text-color="#FFFFFF" :default-active="activePath">
                     <el-submenu index="1">
@@ -15,9 +19,6 @@
                             地区配置
                         </el-menu-item>
                     </el-submenu>
-
-
-
                 </el-menu>
             </el-aside>
             <el-main>
@@ -53,7 +54,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     .el-header,
     .el-footer {
         background-color: #B3C0D1;
@@ -65,7 +66,30 @@
     .el-aside {
         background-color: #20293A !important;
         text-align: center;
-        line-height: 200px;
+        line-height: 0px;
+        display: flex;
+        flex-direction: column;
+
+        .logo {
+            min-height: 56px;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: 23px;
+
+            .logoSvg {
+                font-size: 70px;
+                color: red;
+                position: relative;
+                top: -2px
+            }
+
+            span {
+                color: #fff;
+                font-size: 26px;
+            }
+        }
     }
 
     .el-main {

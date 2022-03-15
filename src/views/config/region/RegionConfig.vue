@@ -14,11 +14,11 @@
 
     <div class="data_medium">
       <div class="left_list">
-        <el-card>
+        <el-card v-for="item in regionList" :key="item.id">
           <div class="name">
             <svg-icon icon-class="name" style="margin-right:4px"></svg-icon>
-            浙江省
-            <div class="btn">
+            {{item.provinceName}}
+            <div class="btn" item>
               <svg-icon icon-class="insert" class-name="insert"></svg-icon>
               <svg-icon icon-class="delete" class-name="delete"></svg-icon>
             </div>
@@ -26,9 +26,9 @@
           <div class="bottom">
             <div class="code">
               <svg-icon icon-class="code" style="margin-right:4px"></svg-icon>
-              zhej
+              {{item.code}}
             </div>
-            <div class="time">2000/02/31</div>
+            <div class="time">{{$moment(item.creatDate).format('YYYY/MM/DD h:mm:ss')}}</div>
           </div>
 
         </el-card>
@@ -72,6 +72,8 @@
     data() {
       return {
         insRegionDialogVisible: false,
+        //省份列表
+        regionList:[],
         table_date: [{
             name: '杭州',
             createDate: '2000/03/23',
@@ -100,7 +102,7 @@
       //接口获取所有省份
       async getRegionList(){
         const res = await this.getRequest('/query_province')
-        console.log(res)
+        this.regionList = res.data.query_province
       }
     },
     created(){
