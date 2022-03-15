@@ -3,7 +3,7 @@
         <el-header></el-header>
         <el-container>
             <el-aside width="200px">
-                <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#fff" router
+                <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
                     active-text-color="#FFFFFF" :default-active="activePath">
                     <el-menu-item index="/layout/region" @click="saveNavState('/layout/region')">
                         <svg-icon icon-class="home" class-name="icon"></svg-icon>
