@@ -66,12 +66,5 @@
       box-shadow: #fff 0px 2px 15px 0px;
     }
   }
-  .el-form{
-    .el-form-item{
-      &:last-child{
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-  }
+  
 </style>

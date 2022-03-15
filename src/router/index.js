@@ -19,7 +19,7 @@ export const constantRouters = [{
     children: [{
       path: 'region',
       name: 'Region',
-      component: () => import('../views/config/RegionConfig.vue'),
+      component: () => import('../views/config/region/RegionConfig.vue'),
       hidden: true
     }]
   }

@@ -2,15 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import ElementUI from 'element-ui';
 import '@/permission'
 import 'element-ui/lib/theme-chalk/index.css';
 //引入样式表
 import '@/assets/style/main.scss'
 
+//按需引入elementui
+import elementui from  '@/utils/elementui'
 
+//引入svg
+import '@/assets/icons'
+
+Vue.use(elementui)
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+
 
 new Vue({
   router,

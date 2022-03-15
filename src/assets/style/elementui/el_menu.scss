@@ -1,0 +1,11 @@
+.el-menu-vertical{
+    border:none !important;
+    .el-menu-item{
+        height: 42px !important;
+        line-height: 42px !important;
+        text-align: left;
+        font-size: 14px;
+        display: flex;
+        align-items:baseline !important;
+    }
+}

@@ -1,24 +1,46 @@
 <template>
     <el-container>
-        <el-header>Header</el-header>
-
+        <el-header></el-header>
         <el-container>
-            <el-aside width="200px"> <router-link :to="{name:'Region'}"><span style="font-size: 12px;">布局-->地区配置</span></router-link></el-aside>
+            <el-aside width="200px">
+                <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#fff" router
+                    active-text-color="#FFFFFF" :default-active="activePath">
+                    <el-menu-item index="/layout/region" @click="saveNavState('/layout/region')">
+                        <svg-icon icon-class="home" class-name="icon"></svg-icon>
+                        地区配置
+                    </el-menu-item>
+                </el-menu>
+            </el-aside>
             <el-main>
                 <!-- <transition name="fade-transform" mode="out-in"> -->
-                    <router-view />
+                <router-view />
                 <!-- </transition> -->
             </el-main>
 
         </el-container>
-        <el-footer>Footer</el-footer>
     </el-container>
 </template>
 
 <script>
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
-        name: 'Latout'
+        name: 'Latout',
+        data(){
+            return{
+                //被激活的链接地址
+                activePath:''
+            }
+        },
+        methods:{
+            //保存侧边栏激活状态
+            saveNavState(activePath){
+                window.sessionStorage.setItem('activePath',activePath)
+            }
+        },
+        created(){
+            //赋值侧边栏激活状态
+            this.activePath = window.sessionStorage.getItem('activePath')
+        }
     }
 </script>
 
@@ -32,7 +54,7 @@
     }
 
     .el-aside {
-        background-color: #D3DCE6;
+        background-color: #20293A !important;
         text-align: center;
         line-height: 200px;
     }
@@ -42,5 +64,12 @@
         text-align: center;
         line-height: 160px;
         background-color: #F5F7FB;
+    }
+
+    .icon {
+        font-size: 14px;
+        margin-right: 4px;
+        position: relative;
+        top: 1px;
     }
 </style>

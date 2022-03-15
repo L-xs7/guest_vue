@@ -1,0 +1,11 @@
+.el-form{
+    .el-form-item{
+        &:last-child{
+            display: flex;
+            justify-content: flex-end;
+            .el-button--default{
+                padding:8px 20px !important;
+            }
+        }
+    }
+}

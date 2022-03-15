@@ -1,0 +1,22 @@
+.el-dialog{
+    min-width: 500px !important;
+}
+.el-dialog__header{
+    border-bottom: 1px solid #E6E7EA;
+}
+.el-dialog__body{
+    border-bottom: 1px solid #E6E7EA;
+}
+.el-dialog__footer{
+    .el-button--medium{
+        padding:8px 20px
+    }
+}
+.el-dialog__body .el-form{
+    padding-left:40px;
+    .el-form-item{
+        &:last-child{
+            display: block;
+        }
+    }
+}

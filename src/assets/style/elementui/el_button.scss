@@ -1,7 +1,11 @@
-.el-button--mudium{
-    padding:8px 20px;
+.el-button--medium{
+    padding:8px 20px !important;
 }
 .el-button--info{
-    background-color: #fff;
-    color: #000;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+.el-button--success{
+    background-color: #3769BE !important;
+    border-color: #3769BE !important;
 }

@@ -1,5 +1,12 @@
 .el-main{
     line-height: 37px !important;
-    display: flex;
-    padding:0px;
+    display: flex !important;
+    padding:12px !important;
+}
+.el-header{
+    height: 48px !important;
+    line-height: 48px !important;
+}
+.el-aside{
+    background-color: #1D46A7 !important;
 }
