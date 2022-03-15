@@ -5,10 +5,19 @@
             <el-aside width="200px">
                 <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
                     active-text-color="#FFFFFF" :default-active="activePath">
-                    <el-menu-item index="/layout/region" @click="saveNavState('/layout/region')">
-                        <svg-icon icon-class="home" class-name="icon"></svg-icon>
-                        地区配置
-                    </el-menu-item>
+                    <el-submenu index="1">
+                        <template slot="title">
+                            <i class="el-icon-location"></i>
+                            <span>系统配置</span>
+                        </template>
+                        <el-menu-item index="/layout/region" @click="saveNavState('/layout/region')">
+                            <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
+                            地区配置
+                        </el-menu-item>
+                    </el-submenu>
+
+
+
                 </el-menu>
             </el-aside>
             <el-main>
@@ -25,19 +34,19 @@
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
         name: 'Latout',
-        data(){
-            return{
+        data() {
+            return {
                 //被激活的链接地址
-                activePath:''
+                activePath: ''
             }
         },
-        methods:{
+        methods: {
             //保存侧边栏激活状态
-            saveNavState(activePath){
-                window.sessionStorage.setItem('activePath',activePath)
+            saveNavState(activePath) {
+                window.sessionStorage.setItem('activePath', activePath)
             }
         },
-        created(){
+        created() {
             //赋值侧边栏激活状态
             this.activePath = window.sessionStorage.getItem('activePath')
         }

@@ -17,7 +17,8 @@ import {
     Container,
     Header,
     Form,
-    FormItem
+    FormItem,
+    Submenu
 } from 'element-ui';
 
 //截取dialog打开方法--背景虚化
@@ -59,6 +60,7 @@ const element = {
         Vue.use(Header)
         Vue.use(Form)
         Vue.use(FormItem)
+        Vue.use(Submenu)
     }
 }
 
