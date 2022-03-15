@@ -1,7 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 
 const path = require('path')
-
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -30,5 +29,20 @@ module.exports = defineConfig({
         symbolId: 'icon-[name]'
       })
       .end()
-    }
+    },
+
+    devServer: {
+      port:8071,
+      proxy: {
+        '/api': {
+          target: `http://localhost:8081/`,
+          changeOrigin: true,
+          ws: true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        }
+      },
+    },
+  
 })

@@ -97,6 +97,14 @@
           return "display:flex;" // 修改的样式
         }
       },
+      //接口获取所有省份
+      async getRegionList(){
+        const res = await this.getRequest('/query_province')
+        console.log(res)
+      }
+    },
+    created(){
+      this.getRegionList()
     }
 
   }

@@ -6,7 +6,8 @@ import '@/permission'
 import 'element-ui/lib/theme-chalk/index.css';
 //引入样式表
 import '@/assets/style/main.scss'
-
+//分别引用axios封装方法
+import { getRequest, postRequest, deleteRequest, putRequest } from './utils/request'
 //按需引入elementui
 import elementui from  '@/utils/elementui'
 
@@ -16,6 +17,10 @@ import '@/assets/icons'
 Vue.use(elementui)
 Vue.config.productionTip = false
 
+Vue.prototype.getRequest = getRequest
+Vue.prototype.postRequest = postRequest
+Vue.prototype.deleteRequest = deleteRequest
+Vue.prototype.putRequest = putRequest
 
 new Vue({
   router,
