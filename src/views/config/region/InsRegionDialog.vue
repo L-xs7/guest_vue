@@ -60,29 +60,36 @@
             handleClose() {
                 this.$emit('update:insRegionDialogVisible', false)
             },
+            //关闭表单之前清空并重置表单的回调
             provinceClosed() {
                 this.province = {
-                    provinceName: '',
-                    code: '',
-                    status: true,
-                }
+                        provinceName: '',
+                        code: '',
+                        status: true,
+                    },
+                    this.$refs['form'].resetFields();
             },
             //添加或修改省份信息
-            async saveRegion() {
-                const res = await this.postRequest(`/region/provinceau?operation=${this.saveOrUpdate}`, this
-                    .province)
-                if (res.status === 200) {
-                    if (this.saveOrUpdate === 0) {
-                        this.$message.success('添加省份成功！')
-                    } else if (this.saveOrUpdate === 1) {
-                        this.$message.success("修改省份成功！")
-                    } else {
-                        this.$message.error("操作符错误！")
+            saveRegion() {
+                this.$refs['form'].validate(async valid => {
+                    if (!valid) {
+                        return
                     }
+                    const res = await this.postRequest(`/region/provinceau?operation=${this.saveOrUpdate}`,
+                        this.province)
+                    if (res.status === 200) {
+                        if (this.saveOrUpdate === 0) {
+                            this.$message.success('添加省份成功！')
+                        } else if (this.saveOrUpdate === 1) {
+                            this.$message.success("修改省份成功！")
+                        } else {
+                            this.$message.error("操作符错误！")
+                        }
 
-                    this.handleClose();
-                    this.$emit('getRegionList')
-                }
+                        this.handleClose();
+                        this.$emit('getRegionList')
+                    }
+                })
             },
             updateRegion(item) {
                 this.province.id = item.id

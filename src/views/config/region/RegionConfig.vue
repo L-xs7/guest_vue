@@ -14,12 +14,16 @@
 
     <div class="data_medium">
       <div class="left_list">
-        <el-card v-for="item in regionList" :key="item.id">
+        <el-card v-for="(item,index) in regionList" :key="item.id" @click.native.capture="activeCard(item,index)"
+          :class="{isActive:isActiveIndex===index}" @mouseenter.native="cardMouseEnter(index)"
+          @mouseleave.native="cardMouseLeave()">
           <div class="name">
             <svg-icon icon-class="name" style="margin-right:4px"></svg-icon>
             {{item.provinceName}}
-
-            <div class="btn">
+            <el-switch v-model="item.status" active-color="#5A97DB" inactive-color="#000" :width="35"
+              @click.native="regionStatusUpdate(item)">
+            </el-switch>
+            <div class="btn" v-show="index === mouseEnterIndex">
               <a href="javascript:;">
                 <svg-icon icon-class="insert" class-name="insert"></svg-icon>
               </a>
@@ -38,7 +42,7 @@
               <svg-icon icon-class="code" style="margin-right:4px"></svg-icon>
               {{item.code}}
             </div>
-            <div class="time">{{$moment(item.creatDate).format('YYYY/MM/DD h:mm:ss')}}</div>
+            <div class="time">{{$moment(item.createDate).format('YYYY/MM/DD h:mm:ss')}}</div>
           </div>
 
         </el-card>
@@ -90,6 +94,10 @@
         query: {
           provinceName: ''
         },
+        //激活的省份卡index 默认是0
+        isActiveIndex: 0,
+        //移入的省份卡index
+        mouseEnterIndex: null,
         //保存删除或修改的操作标识
         saveOrUpdate: null,
         table_date: [{
@@ -142,6 +150,28 @@
           this.getRegionList()
         }
       },
+      //省份状态修改
+      async regionStatusUpdate(item) {
+        const result = await this.$messageBox.confirm('此操作会修改该省份的启用状态，是否继续', '确认？', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }).catch(() => {
+          //如果取消了要把状态取反回来
+          item.status = !item.status
+          this.$message.info('已取消操作！')
+        })
+        if (result !== 'confirm') return
+        const res = await this.getRequest("/region/operationdu", {
+          operation: 1,
+          id: item.id
+        })
+        if (res.status === 200) {
+          this.$message.success(`修改[${item.provinceName}]省份状态成功！`)
+          this.getRegionList()
+        }
+
+      },
       //新增省份信息
       saveProvince() {
         this.saveOrUpdate = 0
@@ -152,6 +182,18 @@
         this.saveOrUpdate = 1
         this.insRegionDialogVisible = true
         PubSub.publish('update', item)
+      },
+      //激活省份卡
+      activeCard(item, index) {
+        this.isActiveIndex = index
+      },
+      //省份卡鼠标移入事件
+      cardMouseEnter(index) {
+        this.mouseEnterIndex = index
+      },
+
+      cardMouseLeave() {
+        this.mouseEnterIndex = null
       }
     },
     created() {
@@ -188,6 +230,10 @@
         display: flex;
         flex-direction: column;
 
+        .isActive {
+          border-color: #5A97DB;
+        }
+
         .el-card {
           min-height: 80px;
           font-size: 16px;
@@ -196,6 +242,8 @@
           text-align: left;
           margin-bottom: 8px;
 
+
+
           &:hover {
             border-color: #5A97DB;
           }
@@ -203,6 +251,20 @@
           .name {
             display: flex;
             align-items: center;
+
+            .el-switch {
+              ::v-deep .el-switch__core {
+                height: 14px !important;
+                position: relative !important;
+
+                &::after {
+                  width: 16px;
+                  height: 14px;
+                  top: -1px;
+                  // left:17px
+                }
+              }
+            }
 
             .btn {
               margin-left: auto;
