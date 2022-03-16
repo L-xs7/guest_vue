@@ -8,6 +8,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/style/main.scss'
 //分别引用axios封装方法
 import { getRequest, postRequest, deleteRequest, putRequest } from './utils/request'
+//post序列化依赖
+import QS from 'qs'
 //按需引入elementui
 import elementui from  '@/utils/elementui'
 
@@ -25,6 +27,7 @@ Vue.prototype.postRequest = postRequest
 Vue.prototype.deleteRequest = deleteRequest
 Vue.prototype.putRequest = putRequest
 Vue.prototype.$moment = moment
+Vue.prototype.$qs = QS
 
 new Vue({
   router,

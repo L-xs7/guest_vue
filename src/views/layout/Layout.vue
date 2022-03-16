@@ -2,10 +2,10 @@
     <el-container>
         <!-- <el-header></el-header> -->
         <el-container>
-            <el-aside width="200px">
+            <el-aside width="240px">
                 <div class="logo">
                     <svg-icon icon-class="logo" class-name="logoSvg"></svg-icon>
-                    <span>Ding</span>
+                    <span style="user-select:none">Ding</span>
                 </div>
                 <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
                     active-text-color="#FFFFFF" :default-active="activePath">
@@ -69,7 +69,6 @@
         line-height: 0px;
         display: flex;
         flex-direction: column;
-
         .logo {
             min-height: 56px;
             padding: 10px 0;
