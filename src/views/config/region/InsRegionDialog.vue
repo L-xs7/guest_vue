@@ -1,5 +1,6 @@
 <template>
-    <el-dialog title="添加省份信息" :visible="insRegionDialogVisible" width="30%" :before-close="handleClose" append-to-body>
+    <el-dialog title="添加省份信息" :visible="insRegionDialogVisible" width="30%" :before-close="handleClose"
+        @close="provinceClosed" append-to-body>
 
         <el-form ref="form" :rules="rules" :model="province" label-width="85px">
             <el-form-item label="省份名称:" prop="provinceName">
@@ -14,7 +15,7 @@
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-            <el-button size='medium' type="info">取 消</el-button>
+            <el-button size='medium' type="info" @click="handleClose()">取 消</el-button>
             <el-button size='medium' type="success" @click="saveRegion()">确 定</el-button>
         </span>
     </el-dialog>
@@ -59,6 +60,13 @@
             handleClose() {
                 this.$emit('update:insRegionDialogVisible', false)
             },
+            provinceClosed() {
+                this.province = {
+                    provinceName: '',
+                    code: '',
+                    status: true,
+                }
+            },
             //添加或修改省份信息
             async saveRegion() {
                 const res = await this.postRequest(`/region/provinceau?operation=${this.saveOrUpdate}`, this
@@ -66,9 +74,9 @@
                 if (res.status === 200) {
                     if (this.saveOrUpdate === 0) {
                         this.$message.success('添加省份成功！')
-                    } else if(this.saveOrUpdate === 1) {
+                    } else if (this.saveOrUpdate === 1) {
                         this.$message.success("修改省份成功！")
-                    }else{
+                    } else {
                         this.$message.error("操作符错误！")
                     }
 
