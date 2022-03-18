@@ -17,11 +17,18 @@ export const constantRouters = [{
     component: () => import('../views/layout/Layout.vue'),
     hidden: true,
     children: [{
-      path: 'region',
-      name: 'Region',
-      component: () => import('../views/config/region/RegionConfig.vue'),
-      hidden: true
-    }]
+        path: 'region',
+        name: 'Region',
+        component: () => import('../views/config/region/RegionConfig.vue'),
+        hidden: true
+      },
+      {
+        path: 'menu',
+        name: 'Menu',
+        component: () => import('../views/config/menu/MenuConfig.vue'),
+        hidden: true
+      }
+    ]
   }
 
 
@@ -31,6 +38,6 @@ export const formatRoutes = () => {
 }
 
 export default new Router({
-  mode: 'hash',
+  mode: 'history',
   routes: constantRouters
 })

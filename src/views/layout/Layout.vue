@@ -18,13 +18,17 @@
                             <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
                             地区配置
                         </el-menu-item>
+                        <el-menu-item index="/layout/menu" @click="saveNavState('/layout/menu')">
+                            <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
+                            菜单配置
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>
             <el-main>
-                <!-- <transition name="fade-transform" mode="out-in"> -->
-                <router-view />
-                <!-- </transition> -->
+                <transition name="fade-transform" mode="out-in">
+                    <router-view />
+                </transition>
             </el-main>
 
         </el-container>
@@ -69,6 +73,7 @@
         line-height: 0px;
         display: flex;
         flex-direction: column;
+
         .logo {
             min-height: 56px;
             padding: 10px 0;

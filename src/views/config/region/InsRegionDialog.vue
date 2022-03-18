@@ -1,10 +1,14 @@
 <template>
-    <el-dialog title="添加省份信息" :visible="insRegionDialogVisible" width="30%" :before-close="handleClose"
+    <el-dialog :title="title" :visible="insRegionDialogVisible" width="30%" :before-close="handleClose"
         @close="provinceClosed" append-to-body>
 
         <el-form ref="form" :rules="rules" :model="province" label-width="85px">
             <el-form-item label="省份名称:" prop="provinceName">
-                <el-input style="width:216px" size="medium" v-model="province.provinceName"></el-input>
+                <el-select style="width:216px" size="medium" v-model="province.provinceName">
+                    <el-option v-for="item in regions" :key="item.id" :value="item.district_name"
+                        :label="item.district_name">
+                    </el-option>
+                </el-select>
             </el-form-item>
             <el-form-item label="省份编码:" prop="code">
                 <el-input style="width:216px" size="medium" v-model="province.code"></el-input>
@@ -27,7 +31,9 @@
         name: 'InsRegionDialog',
         data() {
             return {
+                regions: [],
                 province: {
+                    id: '',
                     provinceName: '',
                     code: '',
                     status: true,
@@ -54,6 +60,9 @@
             //保存删除或修改的操作标识
             saveOrUpdate: {
                 type: Number,
+            },
+            title: {
+                type: String
             }
         },
         methods: {
@@ -63,6 +72,7 @@
             //关闭表单之前清空并重置表单的回调
             provinceClosed() {
                 this.province = {
+                        id: '',
                         provinceName: '',
                         code: '',
                         status: true,
@@ -97,13 +107,21 @@
                 this.province.code = item.code
                 this.province.status = item.status
                 this.province.createDate = item.createDate
+            },
+            async getAllRegion() {
+                const res = await this.getRequest('/district/selRegion')
+                this.regions = res.data
             }
+
         },
         mounted() {
             //编辑消息订阅
             PubSub.subscribe('update', (msg, data) => {
                 this.updateRegion(data)
             })
+        },
+        created() {
+            this.getAllRegion()
         }
     }
 </script>

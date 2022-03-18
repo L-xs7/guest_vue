@@ -3,6 +3,7 @@ import Vue from 'vue'
 import {
     Button,
     Select,
+    Option,
     Table,
     Card,
     Input,
@@ -63,6 +64,7 @@ const element = {
         Vue.use(Form)
         Vue.use(FormItem)
         Vue.use(Submenu)
+        Vue.use(Option)
         Vue.component(Message.name,Message)
         Vue.component(MessageBox.name,MessageBox)
 
