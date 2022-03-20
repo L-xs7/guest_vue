@@ -116,12 +116,15 @@
         },
         mounted() {
             //编辑消息订阅
-            PubSub.subscribe('update', (msg, data) => {
+            this.regionPubSub = PubSub.subscribe('update', (msg, data) => {
                 this.updateRegion(data)
             })
         },
         created() {
             this.getAllRegion()
+        },
+        beforeDestroy(){
+            PubSub.unsubscribe(this.regionPubSub)
         }
     }
 </script>

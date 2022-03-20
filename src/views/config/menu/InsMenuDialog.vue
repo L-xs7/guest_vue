@@ -60,10 +60,7 @@
             </el-row>
             <el-form-item label="重定向:">
                 <el-select style="width:216px" size="medium" v-model="menu.metas.redirect">
-                    <el-option v-for="item in redirectSelectData"
-                        :value="item.url+` (${item.name})`"
-                        :key="item.id"
-                    >
+                    <el-option v-for="item in redirectSelectData" :value="item.url+` (${item.name})`" :key="item.id">
                     </el-option>
                 </el-select>
                 <!-- <el-input v-model="menu.metas.redirect" size="medium" style="width:216px"></el-input> -->
@@ -146,7 +143,7 @@
                 redirectSelectData: []
             }
         },
-       
+
         props: {
             menuDialogVisible: {
                 type: Boolean,
@@ -240,15 +237,19 @@
                 }
             },
             //级联选择器改变事件
-            topMenuChange(val){
+            topMenuChange(val) {
                 console.log(val)
             }
         },
         mounted() {
             //编辑消息订阅
-            PubSub.subscribe('update', (msg, data) => {
+            this.menuPubSub = PubSub.subscribe('update', (msg, data) => {
                 this.updateMenu(data)
             })
+        },
+        beforeDestroy() {
+            // 在组件销毁之前 清除订阅消息
+            PubSub.unsubscribe(this.menuPubSub)
         }
 
     }

@@ -60,7 +60,8 @@
           </el-table-column>
           <el-table-column label="启用状态" width="180">
             <template slot-scope="scope">
-              <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949" @click.native.capture="updateCityStatus(scope.row)">
+              <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949"
+                @click.native.capture="updateCityStatus(scope.row)">
               </el-switch>
             </template>
           </el-table-column>
@@ -244,23 +245,24 @@
         })
         if (res.status === 200) {
           this.$message({
-            type:'success',
-            message:'删除城市信息成功！',
-            duration:0
+            type: 'success',
+            message: '删除城市信息成功！',
+            duration: 0
           })
           this.getTableData(row.provinceId)
         }
       },
 
       updateCity(row) {
-         this.cityDialogTitle = '编辑城市信息'
+        this.cityDialogTitle = '编辑城市信息'
         //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
         this.listCitysByDistrict(row.province.provinceName)
         this.insCityDialogVisible = true
+        PubSub.publish('update',row)
       },
       //城市状态修改
-      async updateCityStatus(row){
-         const result = await this.$messageBox.confirm('此操作会修改该城市的启用状态，是否继续', '确认？', {
+      async updateCityStatus(row) {
+        const result = await this.$messageBox.confirm('此操作会修改该城市的启用状态，是否继续', '确认？', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
@@ -271,7 +273,7 @@
         })
         if (result !== 'confirm') return
 
-        const res = await this.getRequest('/ciyts/citysdu',{
+        const res = await this.getRequest('/ciyts/citysdu', {
           operation: '1',
           cityId: row.id
         })

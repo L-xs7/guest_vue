@@ -1,7 +1,6 @@
 <template>
   <el-dialog :title="cityDialogTitle" :visible="insCityDialogVisible" width="30%" :before-close="handleClose"
     @close="citysDialogClosed" append-to-body>
-
     <el-form ref="form" :rules="rules" :model="citys" label-width="85px">
       <el-form-item label="城市名称:" prop="cityName">
         <el-select style="width:216px" size="medium" v-model="citys.cityName">
@@ -25,6 +24,7 @@
 </template>
 
 <script>
+  import PubSub from 'pubsub-js' //引入PubSub
   export default {
     name: "InsCityDialog",
     data() {
@@ -98,7 +98,25 @@
           }
         })
 
+      },
+      updateCity(data) {
+        this.citys = {
+          id: data.id,
+          cityName: data.cityName,
+          code: data.code,
+          provinceId: data.provinceId,
+          status: data.status
+        }
       }
+    },
+    mounted() {
+      //编辑消息订阅
+      this.cityId = PubSub.subscribe('update', (msg, data) => {
+        this.updateCity(data)
+      })
+    },
+    beforeDestroy() {
+      PubSub.unsubscribe(this.cityId)
     }
   }
 </script>
