@@ -2,7 +2,7 @@
     <el-container>
         <!-- <el-header></el-header> -->
         <el-container>
-            <el-aside width="240px">
+            <el-aside width="230px">
                 <div class="logo">
                     <svg-icon icon-class="logo" class-name="logoSvg"></svg-icon>
                     <span style="user-select:none">Ding</span>

@@ -21,7 +21,13 @@ import {
     FormItem,
     Submenu,
     Message,
-    MessageBox
+    MessageBox,
+    Cascader,
+    InputNumber,
+    Checkbox,
+    Row,
+    Col
+
 } from 'element-ui';
 
 //截取dialog打开方法--背景虚化
@@ -65,6 +71,11 @@ const element = {
         Vue.use(FormItem)
         Vue.use(Submenu)
         Vue.use(Option)
+        Vue.use(Cascader)
+        Vue.use(InputNumber)
+        Vue.use(Checkbox)
+        Vue.use(Row)
+        Vue.use(Col)
         Vue.component(Message.name,Message)
         Vue.component(MessageBox.name,MessageBox)
 

@@ -251,10 +251,11 @@
           this.getTableData(row.provinceId)
         }
       },
-      updateCity() {
+
+      updateCity(row) {
          this.cityDialogTitle = '编辑城市信息'
         //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
-        //this.listCitysByDistrict(需要携带省份信息)
+        this.listCitysByDistrict(row.province.provinceName)
         this.insCityDialogVisible = true
       },
       //城市状态修改
