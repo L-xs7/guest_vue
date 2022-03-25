@@ -8,7 +8,7 @@ export const constantRouters = [{
     path: '/login',
     name: 'Login',
     component: () => import('../views/login/Login.vue'),
-    hidden: true
+    hidden: true,
   },
   {
     //布局页面
@@ -16,6 +16,7 @@ export const constantRouters = [{
     name: 'Layout',
     component: () => import('../views/layout/Layout.vue'),
     hidden: true,
+    redirect: '/layout/region',
     children: [{
         path: 'region',
         name: 'Region',
@@ -34,6 +35,7 @@ export const constantRouters = [{
 
 ]
 export const formatRoutes = () => {
+  
 
 }
 
