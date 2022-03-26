@@ -22,6 +22,10 @@
                             <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
                             菜单配置
                         </el-menu-item>
+                         <el-menu-item index="/layout/role" @click="saveNavState('/layout/role')">
+                            <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
+                            权限配置
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>

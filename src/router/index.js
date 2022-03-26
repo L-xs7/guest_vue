@@ -28,6 +28,12 @@ export const constantRouters = [{
         name: 'Menu',
         component: () => import('../views/config/menu/MenuConfig.vue'),
         hidden: true
+      },
+      {
+        path:'role',
+        name:'Role',
+        component:() => import('../views/config/role/Role.vue'),
+        hidden:true
       }
     ]
   }

@@ -25,7 +25,7 @@
                 </el-table-column>
                 <el-table-column prop="position" label="位置" min-width="80">
                 </el-table-column>
-                <el-table-column prop="menu" label="是否菜单" min-width="80">
+                <el-table-column prop="menu" label="是否菜单" width="80">
                     <template slot-scope="scope">
                         <span v-if="scope.row.menu">是</span>
                         <span v-else>否</span>

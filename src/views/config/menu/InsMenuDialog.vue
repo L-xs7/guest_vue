@@ -7,9 +7,9 @@
             </el-form-item>
             <el-form-item label="上级菜单:" prop="parentId">
                 <el-cascader :disabled="topMenu" style="width:216px" size="medium" v-model="menu.parentId"
-                    :options="menuCascaderData" :props="cascaderProps" @change="topMenuChange">
+                    :options="menuCascaderData" :props="cascaderProps">
                 </el-cascader>
-                <el-checkbox v-model="topMenu" style="margin-left:12px">是否顶级</el-checkbox>
+                <el-checkbox v-model="topMenu" @change="topMenuCheckBoxChange" style="margin-left:12px">是否顶级</el-checkbox>
             </el-form-item>
             <el-row>
                 <el-col :span="8">
@@ -140,7 +140,9 @@
                 },
                 topMenu: false,
                 //重定向select数据
-                redirectSelectData: []
+                redirectSelectData: [],
+                //暂时存储上次菜单，用于恢复取消顶级
+                tempParentId:undefined
             }
         },
 
@@ -162,7 +164,8 @@
             saveOrUpdate: {
                 type: Number,
                 default: 0
-            }
+            },
+
         },
         methods: {
             menuDialogOpen() {
@@ -236,9 +239,30 @@
                     this.topMenu = true
                 }
             },
-            //级联选择器改变事件
-            topMenuChange(val) {
-                console.log(val)
+            //是否顶级复选框 改变事件
+            topMenuCheckBoxChange(val){
+                if(val){
+                    //存储点击顶级时的父菜单id，用于恢复
+                    this.tempParentId = this.menu.parentId
+                    //顶级没有父级菜单
+                    this.menu.parentId = 0
+                    //顶级的层级是0
+                    this.menu.level = 0
+                }else{
+                    //恢复父菜单
+                    this.menu.parentId = this.tempParentId
+                }
+            }
+        },
+        watch: {
+            "menu.parentId": {
+                async handler(val) {
+                    if(!val || val === undefined){
+                        return 
+                    }
+                    const res = await this.getRequest("/menu/selMenuById?id=" + val)
+                    this.menu.level = res.data.selMenuById.level + 1
+                }
             }
         },
         mounted() {
