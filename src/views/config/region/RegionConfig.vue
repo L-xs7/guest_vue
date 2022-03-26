@@ -83,7 +83,7 @@
       :saveOrUpdate="saveOrUpdate" :title="title" />
 
     <InsCityDialog :insCityDialogVisible.sync="insCityDialogVisible" :citySelect="citySelect"
-      :activeRegionId="activeRegionId" :saveOrUpdate="saveOrUpdate" :cityDialogTitle="cityDialogTitle"
+      :activeRegionId="activeRegionId" :citySaveOrUpdate="citySaveOrUpdate" :cityDialogTitle="cityDialogTitle"
       @getTableData="getTableData" />
   </div>
 
@@ -119,6 +119,8 @@
         mouseEnterIndex: null,
         //保存删除或修改的操作标识
         saveOrUpdate: null,
+        //保存对城市删除或修改的操作标识
+        citySaveOrUpdate: null,
         table_date: [],
         //保存当前激活的省份卡片的id号，用于向此省份下添加城市
         activeRegionId: null
@@ -213,6 +215,9 @@
       //打开新增城市信息对话框
       insCitys(item) {
         this.cityDialogTitle = '新增城市信息'
+
+        this.citySaveOrUpdate = 0
+
         //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
         this.listCitysByDistrict(item.provinceName)
         this.insCityDialogVisible = true
@@ -255,10 +260,13 @@
 
       updateCity(row) {
         this.cityDialogTitle = '编辑城市信息'
+        //修改编辑城市信息的操作符为1
+        this.citySaveOrUpdate = 1
+
         //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
         this.listCitysByDistrict(row.province.provinceName)
         this.insCityDialogVisible = true
-        PubSub.publish('update',row)
+        PubSub.publish('update', row)
       },
       //城市状态修改
       async updateCityStatus(row) {

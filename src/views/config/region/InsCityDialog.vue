@@ -56,7 +56,7 @@
         default: false
       },
       //保存删除或修改的操作标识
-      saveOrUpdate: {
+      citySaveOrUpdate: {
         type: Number,
       },
       cityDialogTitle: {
@@ -90,9 +90,14 @@
           }
           //赋值外键--省份
           this.citys.provinceId = this.activeRegionId
-          const res = await this.postRequest('/ciyts/citysau?operation=0', this.citys)
+          const res = await this.postRequest('/ciyts/citysau?operation=' + this.citySaveOrUpdate, this.citys)
           if (res.status === 200) {
-            this.$message.success('添加城市成功！')
+            if (this.citySaveOrUpdate === 0) {
+              this.$message.success(`添加城市成功！`)
+            } else if (this.citySaveOrUpdate === 1) {
+              this.$message.success(`编辑城市成功！`)
+            }
+
             this.handleClose();
             this.$emit('getTableData', this.activeRegionId)
           }
