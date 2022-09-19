@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
-//公共路由
+//公共路由-重定向
 export const constantRouters = [
   {
     path:'/',
