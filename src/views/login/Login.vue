@@ -1,6 +1,5 @@
 <template>
   <div class="login_main" id="login_main">
-    <Background />
     <div class="login_form">
       <el-form label-width="60px">
         <el-form-item label="用户名:">
@@ -19,7 +18,6 @@
 </template>
 
 <script>
-  import Background from './Background.vue'
   export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Login",
@@ -29,7 +27,6 @@
       }
     },
     components: {
-      Background
     },
     methods: {
       login(){
