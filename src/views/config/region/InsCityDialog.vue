@@ -65,9 +65,6 @@
       citySelect: {
         type: Array
       },
-      activeRegionId: {
-        type: Number
-      }
     },
     methods: {
       handleClose() {
@@ -89,7 +86,10 @@
             return
           }
           //赋值外键--省份
-          this.citys.provinceId = this.activeRegionId
+          const regionId = window.sessionStorage.getItem('activeRegion')
+          this.citys.provinceId = regionId
+
+
           const res = await this.postRequest('/ciyts/citysau?operation=' + this.citySaveOrUpdate, this.citys)
           if (res.status === 200) {
             if (this.citySaveOrUpdate === 0) {
@@ -99,7 +99,7 @@
             }
 
             this.handleClose();
-            this.$emit('getTableData', this.activeRegionId)
+            this.$emit('getTableData', regionId)
           }
         })
 

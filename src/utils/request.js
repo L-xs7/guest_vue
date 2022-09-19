@@ -10,6 +10,7 @@ import store from '../store'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8' //post 请求头设置
 axios.defaults.baseURL = '/api/'
+// axios.defaults.baseURL = window.location.origin + ':8811'
 //创建axios实例
 const service = axios.create({
   //超时时间

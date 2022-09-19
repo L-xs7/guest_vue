@@ -83,8 +83,7 @@
       :saveOrUpdate="saveOrUpdate" :title="title" />
 
     <InsCityDialog :insCityDialogVisible.sync="insCityDialogVisible" :citySelect="citySelect"
-      :activeRegionId="activeRegionId" :citySaveOrUpdate="citySaveOrUpdate" :cityDialogTitle="cityDialogTitle"
-      @getTableData="getTableData" />
+      :citySaveOrUpdate="citySaveOrUpdate" :cityDialogTitle="cityDialogTitle" @getTableData="getTableData" />
   </div>
 
 </template>
@@ -122,8 +121,6 @@
         //保存对城市删除或修改的操作标识
         citySaveOrUpdate: null,
         table_date: [],
-        //保存当前激活的省份卡片的id号，用于向此省份下添加城市
-        activeRegionId: null
       }
     },
     methods: {
@@ -199,7 +196,7 @@
       },
       //激活省份卡
       activeCard(item, index) {
-        this.activeRegionId = item.id
+        window.sessionStorage.setItem('activeRegion', item.id)
         this.isActiveIndex = index
         //激活时调用
         this.getTableData(item.id);

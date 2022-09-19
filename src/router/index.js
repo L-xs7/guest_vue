@@ -3,7 +3,12 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 //公共路由
-export const constantRouters = [{
+export const constantRouters = [
+  {
+    path:'/',
+    redirect:'/login'
+  },
+  {
     //登录页面
     path: '/login',
     name: 'Login',
