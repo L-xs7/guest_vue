@@ -61,7 +61,7 @@
     methods: {
       async getRoleList() {
         const res = await this.getRequest("/role/selRole")
-        console.log(res)
+        // console.log(res)
         this.roleList = res.data.selRole
       }
     },
