@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- 这是是最新代码 -->
     <router-view />
   </div>
 </template>
