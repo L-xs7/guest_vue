@@ -19,9 +19,10 @@ export const constantRouters = [
     //布局页面
     path: '/layout',
     name: 'Layout',
+    alias:'/config',
     component: () => import('../views/layout/Layout.vue'),
     hidden: true,
-    redirect: '/layout/region',
+    redirect: '/config/region',
     children: [{
         path: 'region',
         name: 'Region',

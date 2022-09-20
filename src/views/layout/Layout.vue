@@ -22,15 +22,15 @@
               <i class="el-icon-location"></i>
               <span>系统配置</span>
             </template>
-            <el-menu-item index="/layout/region">
+            <el-menu-item index="/config/region">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               地区配置
             </el-menu-item>
-            <el-menu-item index="/layout/menu">
+            <el-menu-item index="/config/menu">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               菜单配置
             </el-menu-item>
-            <el-menu-item index="/layout/role">
+            <el-menu-item index="/config/role">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               权限配置
             </el-menu-item>
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       //被激活的链接地址
-      activePath: "/layout/region",
+      activePath: "/config/region",
     };
   },
   methods: {
