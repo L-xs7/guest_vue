@@ -9,7 +9,9 @@ import {
 import store from '../store'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8' //post 请求头设置
-axios.defaults.baseURL = '/api/'
+// axios.defaults.baseURL = '/api/'
+axios.defaults.baseURL = 'http://175.178.35.231:8811'
+
 //服务器接口服务地址
 // axios.defaults.baseURL = window.location.origin + ':8811'
 //创建axios实例
