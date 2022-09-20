@@ -1,6 +1,7 @@
 <template>
   <div class="login_main" id="login_main">
     <div class="login_form">
+      <!-- Biaoti -->
       <p>叮咚住房</p>
       <el-form label-width="80px">
         <el-form-item label="用户名:">
