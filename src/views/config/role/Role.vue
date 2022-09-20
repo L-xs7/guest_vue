@@ -6,7 +6,7 @@
         搜索
       </el-button>
       <el-button icon="el-icon-plus" size="medium" type="primary" style="margin-left:8px">
-        添加权限11
+        添加权限
       </el-button>
     </div>
 
