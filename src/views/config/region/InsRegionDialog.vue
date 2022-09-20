@@ -2,7 +2,7 @@
     <el-dialog :title="title" :visible="insRegionDialogVisible" width="30%" :before-close="handleClose"
         @close="provinceClosed" append-to-body>
 
-        <el-form ref="form" :rules="rules" :model="province" label-width="85px">
+        <el-form ref="form" :rules="rules" :model="province" label-width="95px">
             <el-form-item label="省份名称:" prop="provinceName">
                 <el-select style="width:216px" size="medium" v-model="province.provinceName">
                     <el-option v-for="item in regions" :key="item.id" :value="item.district_name"

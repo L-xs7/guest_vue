@@ -1,7 +1,7 @@
 <template>
   <el-dialog :title="cityDialogTitle" :visible="insCityDialogVisible" width="30%" :before-close="handleClose"
     @close="citysDialogClosed" append-to-body>
-    <el-form ref="form" :rules="rules" :model="citys" label-width="85px">
+    <el-form ref="form" :rules="rules" :model="citys" label-width="95px">
       <el-form-item label="城市名称:" prop="cityName">
         <el-select style="width:216px" size="medium" v-model="citys.cityName">
           <el-option v-for="item in citySelect" :key="item.id" :value="item.district_name" :label="item.district_name">
