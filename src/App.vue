@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- ceshi -->
     <router-view />
   </div>
 </template>
