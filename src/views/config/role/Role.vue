@@ -6,7 +6,7 @@
         搜索
       </el-button>
       <el-button icon="el-icon-plus" size="medium" type="primary" style="margin-left:8px">
-        添加权限11
+        添加权限
       </el-button>
     </div>
 
@@ -89,6 +89,8 @@
     }
 
     .table_div {
+      background-color: #fff;
+      border-top: 1px solid #ebeef5;
       padding: 12px;
       flex-grow: 1;
       position: relative;

@@ -318,7 +318,9 @@
       flex-grow: 1;
       display: flex;
       padding: 12px;
-      background-color: #F5F7FB;
+      border-top: 1px solid #ebeef5;
+      background-color: #FFFFFF;
+
 
       .left_list {
         width: 270px;

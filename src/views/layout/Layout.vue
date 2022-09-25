@@ -45,8 +45,7 @@
               <img slot="reference" src="@/assets/imgs/tx.jpeg" alt="">
               <div slot class="popMenu">
                 <span>个人中心</span>
-                <span>退出登陆</span>
-
+                <span @click="loggedOut">退出登陆</span>
               </div>
             </el-popover>
           </div>
@@ -93,6 +92,10 @@
       menuSelHandle(val) {
         window.sessionStorage.setItem("indexPath", val);
       },
+      //退出登陆
+      loggedOut() {
+        this.$router.push('/')
+      }
     },
     created() {
       if (window.sessionStorage.getItem("indexPath")) {
@@ -184,13 +187,16 @@
     padding-right: 0 !important;
     // background-color: #f5f7fb;
     min-width: 30px !important;
-    .popMenu {  
-      display: flex; 
+
+    .popMenu {
+      display: flex;
       flex-direction: column;
-      span{
+
+      span {
         line-height: 40px;
         text-align: center;
-        &:hover{
+
+        &:hover {
           background-color: #f5f7fb;
         }
       }

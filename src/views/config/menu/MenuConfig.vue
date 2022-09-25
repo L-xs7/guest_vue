@@ -125,21 +125,21 @@
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning',
-                }).catch((err)=>err)
+                }).catch((err) => err)
 
                 if (result !== 'confirm') return this.$message.info('已取消删除')
 
-                const res = await this.getRequest(`/menu/delMenu?id=${row.id}`).catch(err=>err)
+                const res = await this.getRequest(`/menu/delMenu?id=${row.id}`).catch(err => err)
                 if (res.status === 200) {
                     this.$message.success(`已成功删除【${row.name}】菜单`)
                     this.getMenuTree()
                 }
             },
             //修改菜单信息
-            updateMenu(row){
-                PubSub.publish('update',row)
-                this.title="编辑菜单"
-                this.menuDialogVisible=true
+            updateMenu(row) {
+                PubSub.publish('update', row)
+                this.title = "编辑菜单"
+                this.menuDialogVisible = true
             }
         },
         mounted() {
@@ -165,6 +165,8 @@
         }
 
         .table_div {
+            background-color: #fff;
+            border-top: 1px solid #ebeef5;
             padding: 12px;
             flex-grow: 1;
             position: relative;
