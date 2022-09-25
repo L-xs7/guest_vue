@@ -26,7 +26,10 @@ import {
     InputNumber,
     Checkbox,
     Row,
-    Col
+    Col,
+    Breadcrumb,
+    BreadcrumbItem,
+    Popover
 
 } from 'element-ui';
 
@@ -76,6 +79,9 @@ const element = {
         Vue.use(Checkbox)
         Vue.use(Row)
         Vue.use(Col)
+        Vue.use(Breadcrumb)
+        Vue.use(BreadcrumbItem)
+        Vue.use(Popover)
         Vue.component(Message.name,Message)
         Vue.component(MessageBox.name,MessageBox)
 
