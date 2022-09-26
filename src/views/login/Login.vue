@@ -188,6 +188,7 @@ export default {
         if (!valid) {
           return false
         }
+        
         this.$router.push({
           name: 'Layout',
         })
