@@ -1,7 +1,7 @@
 <template>
     <el-dialog :title="title" :visible="menuDialogVisible" width="680px" :before-close="menuHandleClose" append-to-body
         style="margin-top:-10vh" @open="menuDialogOpen">
-        <el-form ref="menuRuleFormRef" :model="menu" :rules="menuFormRules" label-width="95px">
+        <el-form ref="menuRuleFormRef" :model="menu" :rules="menuFormRules" label-width="110px">
             <el-form-item label="菜单名称:" prop="name">
                 <el-input style="width:216px" size="medium" v-model="menu.name"></el-input>
             </el-form-item>

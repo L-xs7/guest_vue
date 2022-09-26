@@ -1,27 +1,56 @@
 <template>
   <div class="RegionConfig">
     <div class="operating_top">
-      <el-input style="width:216px" clearable @clear="getRegionList" @keypress.native.enter="getRegionList"
-        v-model="query.provinceName" size="medium" placeholder="输入省份名" suffix-icon="el-icon-search">
+      <el-input
+        style="width: 216px"
+        clearable
+        @clear="getRegionList"
+        @keypress.native.enter="getRegionList"
+        v-model="query.provinceName"
+        size="medium"
+        placeholder="输入省份名"
+        suffix-icon="el-icon-search"
+      >
       </el-input>
-      <el-button size="medium" type="info" style="margin-left:8px" @click="getRegionList">
+      <el-button
+        size="medium"
+        type="info"
+        style="margin-left: 8px"
+        @click="getRegionList"
+      >
         搜索
       </el-button>
-      <el-button icon="el-icon-plus" size="medium" type="primary" style="margin-left:8px" @click="saveProvince()">
+      <el-button
+        icon="el-icon-plus"
+        size="medium"
+        type="primary"
+        style="margin-left: 8px"
+        @click="saveProvince()"
+      >
         添加省份
       </el-button>
     </div>
 
     <div class="data_medium">
       <div class="left_list">
-        <el-card v-for="(item,index) in regionList" :key="item.id" @click.native.capture="activeCard(item,index)"
-          :class="{isActive:isActiveIndex===index}" @mouseenter.native="cardMouseEnter(index)"
-          @mouseleave.native="cardMouseLeave()">
+        <el-card
+          v-for="(item, index) in regionList"
+          :key="item.id"
+          @click.native.capture="activeCard(item, index)"
+          :class="{ isActive: isActiveIndex === index }"
+          @mouseenter.native="cardMouseEnter(index)"
+          @mouseleave.native="cardMouseLeave()"
+        >
           <div class="name">
-            <svg-icon icon-class="name" style="margin-right:4px"></svg-icon>
-            {{item.provinceName}}
-            <el-switch v-model="item.status" active-color="#5A97DB" inactive-color="#000" :width="35"
-              @click.native="regionStatusUpdate(item)">
+            <svg-icon icon-class="name" style="margin-right: 4px"></svg-icon>
+            {{ item.provinceName }}
+            <el-switch
+              v-model="item.status"
+              active-color="#5A97DB"
+              inactive-color="#000"
+              :width="35"
+              @click.native="regionStatusUpdate(item)"
+            >
             </el-switch>
             <div class="btn" v-show="index === mouseEnterIndex">
               <a href="javascript:;" @click="insCitys(item)">
@@ -34,41 +63,53 @@
               <a href="javascript:;" @click="deleteProvince(item)">
                 <svg-icon icon-class="delete" class-name="delete"></svg-icon>
               </a>
-
             </div>
           </div>
           <div class="bottom">
             <div class="code">
-              <svg-icon icon-class="code" style="margin-right:4px"></svg-icon>
-              {{item.code}}
+              <svg-icon icon-class="code" style="margin-right: 4px"></svg-icon>
+              {{ item.code }}
             </div>
-            <div class="time">{{$moment(item.createDate).format('YYYY/MM/DD h:mm:ss')}}</div>
+            <div class="time">
+              {{ $moment(item.createDate).format('YYYY/MM/DD h:mm:ss') }}
+            </div>
           </div>
-
         </el-card>
       </div>
       <div class="tableContainer">
-        <el-table style="width: 100%" :data="table_date" :cell-style="changeCellStyle">
+        <el-table
+          style="width: 100%"
+          :data="table_date"
+          :cell-style="changeCellStyle"
+        >
           <el-table-column label="城市名" min-width="130" prop="cityName">
           </el-table-column>
           <el-table-column label="城市编码" min-width="130" prop="code">
           </el-table-column>
           <el-table-column label="新建时间" min-width="180">
             <template slot-scope="scope">
-              {{$moment(scope.row.createDate).format('YYYY/MM/DD h:mm:ss')}}
+              {{ $moment(scope.row.createDate).format('YYYY/MM/DD h:mm:ss') }}
             </template>
           </el-table-column>
           <el-table-column label="启用状态" width="180">
             <template slot-scope="scope">
-              <el-switch v-model="scope.row.status" active-color="#13ce66" inactive-color="#ff4949"
-                @click.native.capture="updateCityStatus(scope.row)">
+              <el-switch
+                v-model="scope.row.status"
+                active-color="#13ce66"
+                inactive-color="#ff4949"
+                @click.native.capture="updateCityStatus(scope.row)"
+              >
               </el-switch>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="80" fixed="right">
             <template slot-scope="scope">
               <a href="javascript:;" @click="deleteCity(scope.row)">
-                <svg-icon icon-class="delete" class-name="delete" style="margin-right:4px"></svg-icon>
+                <svg-icon
+                  icon-class="delete"
+                  class-name="delete"
+                  style="margin-right: 4px"
+                ></svg-icon>
               </a>
               <a href="javascript:;" @click="updateCity(scope.row)">
                 <svg-icon icon-class="update" class-name="update"></svg-icon>
@@ -79,346 +120,358 @@
       </div>
     </div>
 
-    <InsRegionDialog :insRegionDialogVisible.sync="insRegionDialogVisible" @getRegionList="getRegionList"
-      :saveOrUpdate="saveOrUpdate" :title="title" />
+    <InsRegionDialog
+      :insRegionDialogVisible.sync="insRegionDialogVisible"
+      @getRegionList="getRegionList"
+      :saveOrUpdate="saveOrUpdate"
+      :title="title"
+    />
 
-    <InsCityDialog :insCityDialogVisible.sync="insCityDialogVisible" :citySelect="citySelect"
-      :citySaveOrUpdate="citySaveOrUpdate" :cityDialogTitle="cityDialogTitle" @getTableData="getTableData" />
+    <InsCityDialog
+      :insCityDialogVisible.sync="insCityDialogVisible"
+      :citySelect="citySelect"
+      :citySaveOrUpdate="citySaveOrUpdate"
+      :cityDialogTitle="cityDialogTitle"
+      @getTableData="getTableData"
+    />
   </div>
-
 </template>
 
 <script>
-  import InsRegionDialog from './InsRegionDialog.vue'
-  import InsCityDialog from './InsCityDialog.vue';
-  import PubSub from 'pubsub-js' //引入PubSub
-  export default {
-    name: 'RegionConfig',
-    components: {
-      InsRegionDialog,
-      InsCityDialog
-    },
-    data() {
-      return {
-        insRegionDialogVisible: false,
-        title: '',
-        insCityDialogVisible: false,
-        cityDialogTitle: '',
-        //省份列表
-        regionList: [],
-        //城市选择器数据
-        citySelect: [],
-        //获取省份列表查询条件
-        query: {
-          provinceName: ''
-        },
-        //激活的省份卡index 默认是0
-        isActiveIndex: 0,
-        //移入的省份卡index
-        mouseEnterIndex: null,
-        //保存删除或修改的操作标识
-        saveOrUpdate: null,
-        //保存对城市删除或修改的操作标识
-        citySaveOrUpdate: null,
-        table_date: [],
+import InsRegionDialog from './InsRegionDialog.vue'
+import InsCityDialog from './InsCityDialog.vue'
+import PubSub from 'pubsub-js' //引入PubSub
+import {
+  listRegion,
+  listCityByRegion_name,
+  listCityByRegion_id,
+  deleteRegion,
+  statusRegion,
+  cityDelOrSta,
+} from '@/api/config/region'
+export default {
+  name: 'RegionConfig',
+  components: {
+    InsRegionDialog,
+    InsCityDialog,
+  },
+  data() {
+    return {
+      insRegionDialogVisible: false,
+      title: '',
+      insCityDialogVisible: false,
+      cityDialogTitle: '',
+      //省份列表
+      regionList: [],
+      //城市选择器数据
+      citySelect: [],
+      //获取省份列表查询条件
+      query: {
+        provinceName: '',
+      },
+      //激活的省份卡index 默认是0
+      isActiveIndex: 0,
+      //移入的省份卡index
+      mouseEnterIndex: null,
+      //保存删除或修改的操作标识
+      saveOrUpdate: null,
+      //保存对城市删除或修改的操作标识
+      citySaveOrUpdate: null,
+      table_date: [],
+    }
+  },
+  methods: {
+    /* 修改某列样式 */
+    changeCellStyle(row) {
+      if (row.column.label === '操作') {
+        return 'display:flex;' // 修改的样式
       }
     },
-    methods: {
-      /* 修改某列样式 */
-      changeCellStyle(row) {
-        if (row.column.label === "操作") {
-          return "display:flex;" // 修改的样式
-        }
-      },
-      //接口获取所有省份
-      async getRegionList() {
-        const res = await this.getRequest('/region/selAll', this.query)
-        this.regionList = res.data.query_province
-        if (this.regionList.length > 0) {
-          this.getTableData(this.regionList[0].id)
-        }
-      },
-      //删除省份信息
-      async deleteProvince(item) {
-        const result = await this.$messageBox.confirm('此操作会删除该省份信息，是否继续', '确认删除？', {
+    //接口获取所有省份
+    async getRegionList() {
+      const res = await listRegion(this.query)
+      this.regionList = res.data.query_province
+      if (this.regionList.length > 0) {
+        this.getTableData(this.regionList[0].id)
+      }
+    },
+    //删除省份信息
+    async deleteProvince(item) {
+      const result = await this.$messageBox
+        .confirm('此操作会删除该省份信息，是否继续', '确认删除？', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$message.info('已取消删除！')
         })
-        if (result !== 'confirm') return
+      if (result !== 'confirm') return
 
-        const res = await this.getRequest("/region/operationdu", {
-          operation: 0,
-          id: item.id
-        })
-        if (res.status === 200) {
-          this.$message.success(`删除[${item.provinceName}]省份信息成功！`)
-          this.getRegionList()
-        }
-      },
-      //省份状态修改
-      async regionStatusUpdate(item) {
-        const result = await this.$messageBox.confirm('此操作会修改该省份的启用状态，是否继续', '确认？', {
+      const res = await deleteRegion({ operation: 0, id: item.id })
+      if (res.status === 200) {
+        this.$message.success(`删除[${item.provinceName}]省份信息成功！`)
+        this.getRegionList()
+      }
+    },
+    //省份状态修改
+    async regionStatusUpdate(item) {
+      const result = await this.$messageBox
+        .confirm('此操作会修改该省份的启用状态，是否继续', '确认？', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
-        }).catch(() => {
+        })
+        .catch(() => {
           //如果取消了要把状态取反回来
           item.status = !item.status
           this.$message.info('已取消操作！')
         })
-        if (result !== 'confirm') return
-        const res = await this.getRequest("/region/operationdu", {
-          operation: 1,
-          id: item.id
-        })
-        if (res.status === 200) {
-          this.$message.success(`修改[${item.provinceName}]省份状态成功！`)
-          this.getRegionList()
-        }
+      if (result !== 'confirm') return
+      const res = await statusRegion({
+        operation: 1,
+        id: item.id,
+      })
+      if (res.status === 200) {
+        this.$message.success(`修改[${item.provinceName}]省份状态成功！`)
+        this.getRegionList()
+      } else {
+        this.$message.info(res.msg)
+        //如果失败了要把状态取反回来
+        item.status = !item.status
+      }
+    },
+    //新增省份信息
+    saveProvince() {
+      this.saveOrUpdate = 0
+      this.title = '新增省份信息'
 
-      },
-      //新增省份信息
-      saveProvince() {
-        this.saveOrUpdate = 0
-        this.title = "新增省份信息"
+      this.insRegionDialogVisible = true
+    },
+    //编辑省份信息
+    updateProvince(item) {
+      this.saveOrUpdate = 1
+      this.title = '编辑省份信息'
+      this.insRegionDialogVisible = true
+      PubSub.publish('update', item)
+    },
+    //激活省份卡
+    activeCard(item, index) {
+      window.sessionStorage.setItem('activeRegion', item.id)
+      this.isActiveIndex = index
+      //激活时调用
+      this.getTableData(item.id)
+    },
+    //省份卡鼠标移入事件
+    cardMouseEnter(index) {
+      this.mouseEnterIndex = index
+    },
+    cardMouseLeave() {
+      this.mouseEnterIndex = null
+    },
 
-        this.insRegionDialogVisible = true
-      },
-      //编辑省份信息
-      updateProvince(item) {
-        this.saveOrUpdate = 1
-        this.title = "编辑省份信息"
-        this.insRegionDialogVisible = true
-        PubSub.publish('update', item)
-      },
-      //激活省份卡
-      activeCard(item, index) {
-        window.sessionStorage.setItem('activeRegion', item.id)
-        this.isActiveIndex = index
-        //激活时调用
-        this.getTableData(item.id);
-      },
-      //省份卡鼠标移入事件
-      cardMouseEnter(index) {
-        this.mouseEnterIndex = index
-      },
-      cardMouseLeave() {
-        this.mouseEnterIndex = null
-      },
-
-      //打开新增城市信息对话框
-      insCitys(item) {
-        this.cityDialogTitle = '新增城市信息'
-
-        this.citySaveOrUpdate = 0
-
-        //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
-        this.listCitysByDistrict(item.provinceName)
-        this.insCityDialogVisible = true
-      },
-      //查询省份下所有的城市--select
-      async listCitysByDistrict(provinceName) {
-        const res = await this.getRequest(`/district/selByName?provinceName=${provinceName}`)
-        this.citySelect = res.data
-      },
-      //查询省份下所有城市--tableData
-      async getTableData(id) {
-        const res = await this.getRequest(`/ciyts/selByPIdD?regionId=${id}`)
-        // console.log(res)
-        this.table_date = res.data
-      },
-      //删除城市信息
-      async deleteCity(row) {
-        const result = await this.$messageBox.confirm('此操作会删除该城市信息，是否继续', '确认删除？', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning',
-          })
-          .catch(() => {
-            this.$message.info('已取消删除！')
-          })
-        if (result !== 'confirm') return
-        const res = await this.getRequest('/ciyts/citysdu', {
-          operation: '0',
-          cityId: row.id
-        })
-        if (res.status === 200) {
-          this.$message({
-            type: 'success',
-            message: '删除城市信息成功！',
-            duration: 0
-          })
-          this.getTableData(row.provinceId)
-        }
-      },
-
-      updateCity(row) {
-        this.cityDialogTitle = '编辑城市信息'
-        //修改编辑城市信息的操作符为1
-        this.citySaveOrUpdate = 1
-
-        //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
-        this.listCitysByDistrict(row.province.provinceName)
-        this.insCityDialogVisible = true
-        PubSub.publish('update', row)
-      },
-      //城市状态修改
-      async updateCityStatus(row) {
-        const result = await this.$messageBox.confirm('此操作会修改该城市的启用状态，是否继续', '确认？', {
+    //打开新增城市信息对话框
+    insCitys(item) {
+      this.cityDialogTitle = '新增城市信息'
+      this.citySaveOrUpdate = 0
+      //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
+      this.listCitysByDistrict(item.provinceName)
+      this.insCityDialogVisible = true
+    },
+    //查询省份下所有的城市--select
+    async listCitysByDistrict(provinceName) {
+      const res = await listCityByRegion_name(provinceName)
+      this.citySelect = res.data
+    },
+    //查询省份下所有城市--tableData
+    async getTableData(id) {
+      const res = await listCityByRegion_id(id)
+      this.table_date = res.data
+    },
+    //删除城市信息
+    async deleteCity(row) {
+      const result = await this.$messageBox
+        .confirm('此操作会删除该城市信息，是否继续', '确认删除？', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
-        }).catch(() => {
+        })
+        .catch(() => {
+          this.$message.info('已取消删除！')
+        })
+      if (result !== 'confirm') return
+      const res = await cityDelOrSta({
+        operation: '0',
+        cityId: row.id,
+      })
+      if (res.status === 200) {
+        this.$message({
+          type: 'success',
+          message: '删除城市信息成功！',
+          duration: 0,
+        })
+        this.getTableData(row.provinceId)
+      }
+    },
+
+    updateCity(row) {
+      this.cityDialogTitle = '编辑城市信息'
+      //修改编辑城市信息的操作符为1
+      this.citySaveOrUpdate = 1
+
+      //打开新增城市对话框前，先查询省份下所有的城市，供select选择器选择
+      this.listCitysByDistrict(row.province.provinceName)
+      this.insCityDialogVisible = true
+      PubSub.publish('update', row)
+    },
+    //城市状态修改
+    async updateCityStatus(row) {
+      const result = await this.$messageBox
+        .confirm('此操作会修改该城市的启用状态，是否继续', '确认？', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+        })
+        .catch(() => {
           //如果取消了要把状态取反回来
           row.status = !row.status
           this.$message.info('已取消操作！')
         })
-        if (result !== 'confirm') return
+      if (result !== 'confirm') return
 
-        const res = await this.getRequest('/ciyts/citysdu', {
-          operation: '1',
-          cityId: row.id
-        })
-        if (res.status === 200) {
-          this.$message.success(`修改[${row.cityName}]城市状态成功！`)
-          this.getRegionList()
-        }
+      const res = await cityDelOrSta({
+        operation: '1',
+        cityId: row.id,
+      })
+      if (res.status === 200) {
+        this.$message.success(`修改[${row.cityName}]城市状态成功！`)
+        this.getRegionList()
       }
     },
-    created() {
-      this.getRegionList()
-    },
-    mounted() {
-
-    }
-
-  }
+  },
+  created() {
+    this.getRegionList()
+  },
+  mounted() {},
+}
 </script>
 
 <style lang="scss" scoped>
-  .RegionConfig {
+.RegionConfig {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  .operating_top {
+    min-height: 48px;
+    max-height: 48px;
+    height: 48px;
+    display: flex;
+    background-color: #ffffff;
+    align-items: center;
+    padding-left: 12px;
+  }
+
+  .data_medium {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
+    padding: 12px;
+    border-top: 1px solid #ebeef5;
+    background-color: #ffffff;
 
-    .operating_top {
-      min-height: 48px;
-      max-height: 48px;
-      height: 48px;
+    .left_list {
+      width: 270px;
       display: flex;
-      background-color: #FFFFFF;
-      align-items: center;
-      padding-left: 12px;
-    }
+      flex-direction: column;
 
-    .data_medium {
-      flex-grow: 1;
-      display: flex;
-      padding: 12px;
-      border-top: 1px solid #ebeef5;
-      background-color: #FFFFFF;
+      .isActive {
+        border-color: #5a97db;
+      }
 
+      .el-card {
+        min-height: 80px;
+        font-size: 16px;
+        padding: 8px 12px;
+        cursor: pointer;
+        text-align: left;
+        margin-bottom: 8px;
 
-      .left_list {
-        width: 270px;
-        display: flex;
-        flex-direction: column;
-
-        .isActive {
-          border-color: #5A97DB;
+        &:hover {
+          border-color: #5a97db;
         }
 
-        .el-card {
-          min-height: 80px;
-          font-size: 16px;
-          padding: 8px 12px;
-          cursor: pointer;
-          text-align: left;
-          margin-bottom: 8px;
+        .name {
+          display: flex;
+          align-items: center;
 
+          .el-switch {
+            ::v-deep .el-switch__core {
+              height: 14px !important;
+              position: relative !important;
 
-
-          &:hover {
-            border-color: #5A97DB;
+              &::after {
+                width: 16px;
+                height: 14px;
+                top: -1px;
+                // left:17px
+              }
+            }
           }
 
-          .name {
+          .btn {
+            margin-left: auto;
             display: flex;
             align-items: center;
 
-            .el-switch {
-              ::v-deep .el-switch__core {
-                height: 14px !important;
-                position: relative !important;
-
-                &::after {
-                  width: 16px;
-                  height: 14px;
-                  top: -1px;
-                  // left:17px
-                }
-              }
-            }
-
-            .btn {
-              margin-left: auto;
-              display: flex;
-              align-items: center;
-
-              .insert {
-                font-size: 16px;
-                margin-right: 4px;
-              }
-
-              .delete {
-                font-size: 19px;
-                position: relative;
-                top: 0.5px;
-              }
-            }
-          }
-
-          .bottom {
-            display: flex;
-
-            .code {
+            .insert {
               font-size: 16px;
+              margin-right: 4px;
             }
 
-            .time {
-              font-size: 13px;
-              margin-left: auto;
+            .delete {
+              font-size: 19px;
+              position: relative;
+              top: 0.5px;
             }
           }
-
         }
 
-        .el-card ::v-deep .el-card__body {
-          padding: 0px;
-        }
+        .bottom {
+          display: flex;
 
-        .el-card.is-always-shadow,
-        .el-card.is-hover-shadow:focus,
-        .el-card.is-hover-shadow:hover {
-          box-shadow: none;
+          .code {
+            font-size: 16px;
+          }
+
+          .time {
+            font-size: 13px;
+            margin-left: auto;
+          }
         }
       }
 
-      .tableContainer {
-        flex-grow: 1;
-        padding: 0 8px;
-        position: relative;
+      .el-card ::v-deep .el-card__body {
+        padding: 0px;
+      }
 
-        .delete,
-        .update {
-          font-size: 16px;
-          cursor: pointer;
-        }
+      .el-card.is-always-shadow,
+      .el-card.is-hover-shadow:focus,
+      .el-card.is-hover-shadow:hover {
+        box-shadow: none;
       }
     }
 
+    .tableContainer {
+      flex-grow: 1;
+      padding: 0 8px;
+      position: relative;
+
+      .delete,
+      .update {
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
   }
+}
 </style>

@@ -6,7 +6,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 //引入样式表
 import '@/assets/style/main.scss'
 //分别引用axios封装方法
-import { getRequest, postRequest, deleteRequest, putRequest } from './utils/request'
+import { getRequest, postRequest, deleteRequest, putRequest } from './api/request'
 //post序列化依赖
 import QS from 'qs'
 //按需引入elementui
