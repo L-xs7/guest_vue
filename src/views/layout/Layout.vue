@@ -9,21 +9,25 @@
         </div>
         <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
           active-text-color="#fff" :default-active="activePath" @select="menuSelHandle">
-          <!-- 测试提交 -->
+            <el-menu-item index="/layout/overview">
+              <i class="el-icon-s-home i1"></i>
+              <span>系统总览</span>
+            </el-menu-item>
+         
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-location i1"></i>
               <span>系统配置</span>
             </template>
-            <el-menu-item index="/config/region">
+            <el-menu-item index="/layout/config/region">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               地区配置
             </el-menu-item>
-            <el-menu-item index="/config/menu">
+            <el-menu-item index="/layout/config/menu">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               菜单配置
             </el-menu-item>
-            <el-menu-item index="/config/role">
+            <el-menu-item index="/layout/config/role">
               <!-- <svg-icon icon-class="home" class-name="icon"></svg-icon> -->
               权限配置
             </el-menu-item>
@@ -63,7 +67,7 @@
     data() {
       return {
         //被激活的链接地址
-        activePath: "/config/region",
+        activePath: "",
         breadCrumbList: []
       };
     },
@@ -77,6 +81,9 @@
           }
           let breadCrumbList = []
           val.matched.forEach(item => {
+            if(item.meta.isBreadShow === false){
+              return
+            }
             let obj = {}
             obj.name = item.meta.name
             obj.path = item.path
@@ -121,7 +128,12 @@
     line-height: 0px;
     display: flex;
     flex-direction: column;
-
+    .el-menu{
+      .i1{
+        position: relative;
+        top:-2px;
+      }
+    }
     .logo {
       min-height: 56px;
       padding: 10px 0;
@@ -155,6 +167,8 @@
     .header_div {
       width: 100%;
       height: 48px;
+      max-height: 48px;
+      min-height: 48px;
       margin-bottom: 12px;
       background-color: #fff;
       display: flex;

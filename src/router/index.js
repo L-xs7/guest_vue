@@ -26,35 +26,51 @@ export const constantRouters = [
     //布局页面
     path: '/layout',
     name: 'Layout',
-    alias: '/config',
     component: () => import('../views/layout/Layout.vue'),
     hidden: true,
-    redirect: '/config/region',
-    meta: { name: '系统配置', isMenu: true },
-    children: [{
-      path: 'region',
-      name: 'Region',
-      component: () => import('../views/config/region/RegionConfig.vue'),
-      hidden: true,
-      meta: { name: '地区配置', isMenu: false },
-    },
-    {
-      path: 'menu',
-      name: 'Menu',
-      component: () => import('../views/config/menu/MenuConfig.vue'),
-      hidden: true,
-      meta: { name: '菜单配置', isMenu: false },
-    },
-    {
-      path: 'role',
-      name: 'Role',
-      component: () => import('../views/config/role/Role.vue'),
-      hidden: true,
-      meta: { name: '权限配置', isMenu: false },
-    }
-    ]
-  }
+    redirect: '/layout/overview',
+    meta: { name: '布局页面', isMenu: true ,isBreadShow:false},
+    children: [
+      {
+        path: 'config',
+        name: 'config',
+        meta: { name: '系统配置', isMenu: true },
+        component: () => import('../views/config/index.vue'),
+        children: [
+          {
+            path: 'region',
+            name: 'Region',
+            component: () => import('../views/config/region/RegionConfig.vue'),
+            hidden: true,
+            meta: { name: '地区配置', isMenu: false },
+          },
+          {
+            path: 'menu',
+            name: 'Menu',
+            component: () => import('../views/config/menu/MenuConfig.vue'),
+            hidden: true,
+            meta: { name: '菜单配置', isMenu: false },
+          },
+          {
+            path: 'role',
+            name: 'Role',
+            component: () => import('../views/config/role/Role.vue'),
+            hidden: true,
+            meta: { name: '权限配置', isMenu: false },
+          }
+        ]
+      },
+      {
+        path:'overview',
+        name:'overview',
+        meta: { name: '系统总览'},
+        component:() => import('../views/overview/Overview.vue')
 
+      }
+
+
+    ]
+  },
 
 ]
 export const formatRoutes = () => {

@@ -7,7 +7,7 @@ function resolve(dir) {
 
 module.exports = defineConfig({
   transpileDependencies: true,
-  // lintOnSave:false  //关闭语法检查
+  lintOnSave:false,  //关闭语法检查
 
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test

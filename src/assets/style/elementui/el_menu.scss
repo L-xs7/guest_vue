@@ -6,10 +6,10 @@
         text-align: left;
         font-size: 14px;
     }
-    .el-menu-item{
-        padding-left: 48px !important;
-    }
     .is-active{
         background-color: rgb(26,33,46) !important;
+    }
+    .el-submenu .el-menu-item{
+        padding-left: 47px !important;
     }
 }
