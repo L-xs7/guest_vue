@@ -77,6 +77,7 @@
 <script>
     import InsMenuDialog from './InsMenuDialog.vue'
     import PubSub from 'pubsub-js'
+    import {menuTree,menuByName,menuDel} from '@/api/config/menu'
     export default {
         name: 'MenuContainer',
         data() {
@@ -95,19 +96,21 @@
         },
         methods: {
             async getMenuTree() {
-                const res = await this.getRequest(`/menu/selMenuTree`)
+                const res = await menuTree()
                 this.menuTableData = res.data
                 this.menuCascaderData = res.data
             },
             async getMenuTreeByName() {
-                const res = await this.getRequest(`/menu/selMenuByName?menuName=${this.menuName}`)
-                // console.log(res.data)
+                const res = await menuByName(this.menuName)
+                console.log(res)
                 let menuTreeByName = []
                 if (res.data && res.data[0].length > 0) {
                     res.data[0].forEach(item => {
                         menuTreeByName.push(item)
                     })
                     this.menuTableData = menuTreeByName
+                }else{
+                      this.menuTableData = []
                 }
             },
             insMenu() {
@@ -129,7 +132,8 @@
 
                 if (result !== 'confirm') return this.$message.info('已取消删除')
 
-                const res = await this.getRequest(`/menu/delMenu?id=${row.id}`).catch(err => err)
+                // const res = await this.getRequest(`/menu/delMenu?id=${row.id}`).catch(err => err)
+                const res = await menuDel(row.id)
                 if (res.status === 200) {
                     this.$message.success(`已成功删除【${row.name}】菜单`)
                     this.getMenuTree()
