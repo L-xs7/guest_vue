@@ -67,7 +67,7 @@
     data() {
       return {
         //被激活的链接地址
-        activePath: "",
+        activePath: "/layout/overview",
         breadCrumbList: []
       };
     },
