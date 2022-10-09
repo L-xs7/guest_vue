@@ -12,9 +12,12 @@ import elementui from  '@/utils/elementui'
 import moment from 'moment' // 导入时间格式化文件
 //引入svg
 import '@/assets/icons'
+//引入echarts
+import * as echarts from 'echarts'
 Vue.use(elementui)
 Vue.config.productionTip = false
 Vue.prototype.$moment = moment
+Vue.prototype.$echarts = echarts
 
 new Vue({
   router,

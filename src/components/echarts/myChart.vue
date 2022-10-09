@@ -26,7 +26,7 @@ export default {
     },
     height: {
       type: String,
-      default: "200px",
+      default: "100%",
     },
     clickTarget:{ //绑定图表事件
       type:String,

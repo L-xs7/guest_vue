@@ -8,7 +8,7 @@
           <span style="user-select: none">Ding</span>
         </div>
         <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
-          active-text-color="#fff" :default-active="activePath" @select="menuSelHandle">
+          active-text-color="#fff" :default-active="activePath" :default-openeds="['1']"  @select="menuSelHandle">
             <el-menu-item index="/layout/overview">
               <i class="el-icon-s-home i1"></i>
               <span>系统总览</span>
@@ -67,7 +67,7 @@
     data() {
       return {
         //被激活的链接地址
-        activePath: "",
+        activePath: "/layout/overview",
         breadCrumbList: []
       };
     },
