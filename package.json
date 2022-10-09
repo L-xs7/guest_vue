@@ -11,7 +11,10 @@
     "axios": "^0.26.0",
     "core-js": "^3.8.3",
     "echarts": "^5.4.0",
+<<<<<<< HEAD
     "element-resize-detector": "^1.2.4",
+=======
+>>>>>>> 2f9e95c01b9a634f4b039981d54747b318268463
     "element-ui": "^2.15.6",
     "js-cookie": "^3.0.1",
     "moment": "^2.29.1",
