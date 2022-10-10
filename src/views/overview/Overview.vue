@@ -25,7 +25,9 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Overview',
   data() {
-    return {}
+    return {
+      
+    }
   },
   methods: {
     initLineEcharts() {
@@ -60,10 +62,10 @@ export default {
           },
 
           //标题
-          title: {
-            text: 'study',
-            fontSize: '18',
-          },
+          // title: {
+          //   text: 'study',
+          //   fontSize: '18',
+          // },
 
           //图例
           legend: {},
@@ -97,13 +99,13 @@ export default {
           //数据支持
           series: [
             {
-              name: 'lxs',
+              name: 'Evaporation',
               data: [150, 230, 334, 211, 147, 260, 777],
               type: 'line', //说明是折线图
             },
 
             {
-              name: 'azx',
+              name: 'Rainfall',
               data: [350, 130, 234, 111, 247, 360, 577],
               type: 'line', //说明是折线图
             },
@@ -112,6 +114,7 @@ export default {
 
         //这个把之前的配置对象 设置到 初始化完事的画布里
         myChart.setOption(option)
+        this.myChart1 = myChart
       }
     },
     
@@ -139,28 +142,29 @@ export default {
             {
               name: 'Nightingale Chart',
               type: 'pie',
-              string: '40%',
+               radius: [20, 80],
               center: ['50%', '50%'],
               roseType: 'area',
               itemStyle: {
-                borderRadius: 8,
+                borderRadius: 8
               },
               legendHoverLink: false,
               data: [
-                { value: 40, name: 'azx' },
-                { value: 38, name: 'lxs' },
-                { value: 32, name: 'zjf' },
-                { value: 30, name: 'wsn' },
-                { value: 28, name: 'wzy' },
-                { value: 26, name: 'lwq' },
-                { value: 22, name: 'wyw' },
-                { value: 18, name: 'xxx' },
+                { value: 40, name: 'rose1' },
+                { value: 38, name: 'rose2' },
+                { value: 32, name: 'rose3' },
+                { value: 30, name: 'rose4' },
+                { value: 28, name: 'rose5' },
+                { value: 26, name: 'rose6' },
+                { value: 22, name: 'rose7' },
+                { value: 18, name: 'rose8' },
               ],
             },
           ],
         }
 
         myChart.setOption(option)
+        this.myChart2 = myChart
       }
     },
   },
@@ -184,6 +188,10 @@ export default {
   mounted() {
     this.initLineEcharts()
     this.initPieEcharts()
+    window.addEventListener('resize',()=>{
+      this.myChart1.resize()
+      this.myChart2.resize()
+    })
   },
 }
 </script>
