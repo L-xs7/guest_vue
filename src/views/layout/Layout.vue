@@ -7,13 +7,21 @@
           <svg-icon icon-class="logo" class-name="logoSvg"></svg-icon>
           <span style="user-select: none">Ding</span>
         </div>
-        <el-menu class="el-menu-vertical" background-color="#20293A" text-color="#BDC0C6" router
-          active-text-color="#fff" :default-active="activePath" :default-openeds="['1']"  @select="menuSelHandle">
-            <el-menu-item index="/layout/overview">
-              <i class="el-icon-s-home i1"></i>
-              <span>系统总览</span>
-            </el-menu-item>
-         
+        <el-menu
+          class="el-menu-vertical"
+          background-color="#20293A"
+          text-color="#BDC0C6"
+          router
+          active-text-color="#fff"
+          :default-active="activePath"
+          :default-openeds="['1']"
+          @select="menuSelHandle"
+        >
+          <el-menu-item index="/layout/overview">
+            <i class="el-icon-s-home i1"></i>
+            <span>系统总览</span>
+          </el-menu-item>
+
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location i1"></i>
@@ -32,6 +40,11 @@
               权限配置
             </el-menu-item>
           </el-submenu>
+
+            <el-menu-item index="/layout/report">
+            <i class="el-icon-s-order i1"></i>
+            <span>信息报表</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>
@@ -40,13 +53,23 @@
             <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
             <!-- <el-breadcrumb-item>系统配置</el-breadcrumb-item>
             <el-breadcrumb-item>地区配置</el-breadcrumb-item> -->
-            <el-breadcrumb-item v-for="item in breadCrumbList" :to="item.isMenu ? false :{path: item.path}"
-              :key="item.name">{{item.name}}
+            <el-breadcrumb-item
+              v-for="item in breadCrumbList"
+              :to="item.isMenu ? false : { path: item.path }"
+              :key="item.name"
+              >{{ item.name }}
             </el-breadcrumb-item>
           </el-breadcrumb>
           <div class="tx">
-            <el-popover placement="top-start" visible-arrow title="" popper-class="tx_Menu" width="120" trigger="click">
-              <img slot="reference" src="@/assets/imgs/tx.jpeg" alt="">
+            <el-popover
+              placement="top-start"
+              visible-arrow
+              title=""
+              popper-class="tx_Menu"
+              width="120"
+              trigger="click"
+            >
+              <img slot="reference" src="@/assets/imgs/tx.jpeg" alt="" />
               <div slot class="popMenu">
                 <span>个人中心</span>
                 <span @click="loggedOut">退出登陆</span>
@@ -61,159 +84,158 @@
 </template>
 
 <script>
-  export default {
-    // eslint-disable-next-line vue/multi-word-component-names
-    name: "Latout",
-    data() {
-      return {
-        //被激活的链接地址
-        activePath: "/layout/overview",
-        breadCrumbList: []
-      };
-    },
-    watch: {
-      $route: {
-        immediate: true,
-        handler(val) {
-          // console.log(val.matched)
-          if (!val.matched) {
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: 'Latout',
+  data() {
+    return {
+      //被激活的链接地址
+      activePath: '/layout/overview',
+      breadCrumbList: [],
+    }
+  },
+  watch: {
+    $route: {
+      immediate: true,
+      handler(val) {
+        // console.log(val.matched)
+        if (!val.matched) {
+          return
+        }
+        let breadCrumbList = []
+        val.matched.forEach((item) => {
+          if (item.meta.isBreadShow === false) {
             return
           }
-          let breadCrumbList = []
-          val.matched.forEach(item => {
-            if(item.meta.isBreadShow === false){
-              return
-            }
-            let obj = {}
-            obj.name = item.meta.name
-            obj.path = item.path
-            obj.isMenu = item.meta.isMenu
-            breadCrumbList.push(obj)
-          })
-          this.breadCrumbList = breadCrumbList
-        }
-
-      }
-    },
-    methods: {
-      menuSelHandle(val) {
-        window.sessionStorage.setItem("indexPath", val);
+          let obj = {}
+          obj.name = item.meta.name
+          obj.path = item.path
+          obj.isMenu = item.meta.isMenu
+          breadCrumbList.push(obj)
+        })
+        this.breadCrumbList = breadCrumbList
       },
-      //退出登陆
-      loggedOut() {
-        this.$router.push('/')
-      }
     },
-    created() {
-      if (window.sessionStorage.getItem("indexPath")) {
-        //赋值侧边栏激活状态
-        this.activePath = window.sessionStorage.getItem("indexPath");
-      }
+  },
+  methods: {
+    menuSelHandle(val) {
+      window.sessionStorage.setItem('indexPath', val)
     },
-  };
+    //退出登陆
+    loggedOut() {
+      this.$router.push('/')
+    },
+  },
+  created() {
+    if (window.sessionStorage.getItem('indexPath')) {
+      //赋值侧边栏激活状态
+      this.activePath = window.sessionStorage.getItem('indexPath')
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-  .el-header,
-  .el-footer {
-    background-color: #b3c0d1;
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
+.el-header,
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
 
-  .el-aside {
-    background-color: #20293a !important;
-    text-align: center;
-    line-height: 0px;
+.el-aside {
+  background-color: #20293a !important;
+  text-align: center;
+  line-height: 0px;
+  display: flex;
+  flex-direction: column;
+  .el-menu {
+    .i1 {
+      position: relative;
+      top: -2px;
+    }
+  }
+  .logo {
+    min-height: 56px;
+    padding: 10px 0;
     display: flex;
-    flex-direction: column;
-    .el-menu{
-      .i1{
-        position: relative;
-        top:-2px;
-      }
+    justify-content: center;
+    align-items: center;
+    padding-right: 23px;
+
+    .logoSvg {
+      font-size: 70px;
+      color: red;
+      position: relative;
+      top: -2px;
     }
-    .logo {
-      min-height: 56px;
-      padding: 10px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-right: 23px;
 
-      .logoSvg {
-        font-size: 70px;
-        color: red;
-        position: relative;
-        top: -2px;
-      }
-
-      span {
-        color: #fff;
-        font-size: 26px;
-      }
+    span {
+      color: #fff;
+      font-size: 26px;
     }
   }
+}
 
-  .el-main {
-    color: #333;
-    text-align: center;
-    line-height: 160px;
-    background-color: #f5f7fb;
+.el-main {
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+  background-color: #f5f7fb;
+  display: flex;
+  flex-direction: column;
+
+  .header_div {
+    width: 100%;
+    height: 48px;
+    max-height: 48px;
+    min-height: 48px;
+    margin-bottom: 12px;
+    background-color: #fff;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    padding: 0 12px;
 
-    .header_div {
-      width: 100%;
-      height: 48px;
-      max-height: 48px;
-      min-height: 48px;
-      margin-bottom: 12px;
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 0 12px;
+    .tx {
+      margin-left: auto;
+      cursor: pointer;
 
-      .tx {
-        margin-left: auto;
-        cursor: pointer;
-
-        img {
-          width: 38px;
-          height: 38px;
-          border-radius: 4px;
-        }
+      img {
+        width: 38px;
+        height: 38px;
+        border-radius: 4px;
       }
     }
   }
+}
 
-  .icon {
-    font-size: 14px;
-    margin-right: 4px;
-    position: relative;
-    top: 1px;
-  }
+.icon {
+  font-size: 14px;
+  margin-right: 4px;
+  position: relative;
+  top: 1px;
+}
 </style>
 <style lang="scss">
-  .tx_Menu {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    // background-color: #f5f7fb;
-    min-width: 30px !important;
+.tx_Menu {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  // background-color: #f5f7fb;
+  min-width: 30px !important;
 
-    .popMenu {
-      display: flex;
-      flex-direction: column;
+  .popMenu {
+    display: flex;
+    flex-direction: column;
 
-      span {
-        line-height: 40px;
-        text-align: center;
+    span {
+      line-height: 40px;
+      text-align: center;
 
-        &:hover {
-          background-color: #f5f7fb;
-        }
+      &:hover {
+        background-color: #f5f7fb;
       }
     }
   }
+}
 </style>

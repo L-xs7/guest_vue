@@ -66,9 +66,14 @@ export const constantRouters = [
         meta: { name: '系统总览'},
         component:() => import('../views/overview/Overview.vue')
 
+      },
+      {
+        path:'report',
+        name:'report',
+        meta: { name: '信息报表'},
+        component:() => import('../views/report')
+
       }
-
-
     ]
   },
 
