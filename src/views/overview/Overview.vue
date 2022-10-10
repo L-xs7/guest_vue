@@ -22,8 +22,6 @@
             <div class="right"></div>
         </div>
 
-
-    </div>
     <div class="f3">
       <div></div>
       <div class="right"></div>
@@ -31,6 +29,7 @@
     <div class="f4">
       <div></div>
       <div class="right"></div>
+    </div>
     </div>
 </template>
 
