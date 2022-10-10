@@ -15,8 +15,6 @@ import * as echarts from 'echarts'
 import moment from 'moment' // 导入时间格式化文件
 //引入svg
 import '@/assets/icons'
-//引入echarts
-import * as echarts from 'echarts'
 Vue.use(elementui)
 Vue.config.productionTip = false
 //将echarts 插入 原型中  这步做完就有this.echarts
