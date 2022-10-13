@@ -147,10 +147,10 @@
                         },
 
                         //标题
-                        title: {
-                            text: 'study',
-                            fontSize: '18',
-                        },
+                        // title: {
+                        //     text: 'study',
+                        //     fontSize: '18',
+                        // },
 
                         //图例
                         legend: {},
@@ -188,13 +188,13 @@
 
                         //数据支持
                         series: [{
-                                name: 'lxs',
+                                name: 'Evaporation',
                                 data: [150, 230, 334, 211, 147, 260, 777],
                                 type: 'line' //说明是折线图
                             },
 
                             {
-                                name: 'azx',
+                                name: 'Rainfall',
                                 data: [350, 130, 234, 111, 247, 360, 577],
                                 type: 'line' //说明是折线图
                             },
@@ -203,6 +203,7 @@
 
                     //这个把之前的配置对象 设置到 初始化完事的画布里
                     myChart.setOption(option)
+                    this.myChart1 = myChart
                 }
             },
             sssas() {
@@ -214,7 +215,7 @@
 
                     let option = {
                         legend: {
-                            top: 'bottom'
+                            bottom:'1%'
                         },
                         toolbox: {
                             show: true,
@@ -237,7 +238,7 @@
                         series: [{
                             name: 'Nightingale Chart',
                             type: 'pie',
-                            string: '40%',
+                            radius: [20, 80],
                             center: ['50%', '50%'],
                             roseType: 'area',
                             itemStyle: {
@@ -246,41 +247,43 @@
                             legendHoverLink: false,
                             data: [{
                                     value: 40,
-                                    name: 'azx'
+                                    name: 'rose1'
                                 },
                                 {
                                     value: 38,
-                                    name: 'lxs'
+                                    name: 'rose2'
                                 },
                                 {
                                     value: 32,
-                                    name: 'zjf'
+                                    name: 'rose3'
                                 },
                                 {
                                     value: 30,
-                                    name: 'wsn'
+                                    name: 'rose4'
                                 },
                                 {
                                     value: 28,
-                                    name: 'wzy'
+                                    name: 'rose5'
                                 },
                                 {
                                     value: 26,
-                                    name: 'lwq'
+                                    name: 'rose6'
                                 },
                                 {
                                     value: 22,
-                                    name: 'wyw'
+                                    name: 'rose7'
                                 },
                                 {
                                     value: 18,
-                                    name: 'xxx'
+                                    name: 'rose8'
                                 }
                             ]
                         }]
                     }
 
                     myChart.setOption(option)
+                    this.myChart2 = myChart
+
                 }
             },
 
@@ -316,6 +319,11 @@
         mounted() {
             this.initLineEcharts()
             this.sssas()
+            window.addEventListener('resize',()=>{
+                this.myChart1.resize()
+                this.myChart2.resize()
+            })
+
         },
 
     }
